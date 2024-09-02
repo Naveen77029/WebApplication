@@ -1,12 +1,12 @@
 pipeline {
 			agent any
-			environment{
+			//environment{
 				RELEASE_VERSION = "1.0.1"
                 VSTest = tool 'vstest'	
 				MSBuild = tool 'msbuild'
 				Nuget = 'C:\\Program Files (x86)\\Jenkins\\nuget.exe'
 				MSDeploy = "C:\\Program Files (x86)\\IIS\\Microsoft Web Deploy V3\\msdeploy.exe"
-            }
+           // } 
 			options {
 				buildDiscarder(logRotator(numToKeepStr:'5'))
 			}
