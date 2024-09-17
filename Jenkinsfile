@@ -2,7 +2,7 @@ pipeline {
 			agent any
 			//environment{
 				RELEASE_VERSION = "1.0.1"
-                VSTest = tool 'vstest'	
+                		VSTest = tool 'vstest'	
 				MSBuild = tool 'msbuild'
 				Nuget = 'C:\\Program Files (x86)\\Jenkins\\nuget.exe'
 				MSDeploy = "C:\\Program Files (x86)\\IIS\\Microsoft Web Deploy V3\\msdeploy.exe"
@@ -16,7 +16,7 @@ pipeline {
 					steps{
 						slackSend (color: '#FFFF00', message: "STARTED: Job '${env.JOB_NAME} [${env.BUILD_NUMBER}]' (${env.BUILD_URL})")
 						setBuildStatus("PENDING: Job '${env.JOB_NAME} [${env.BUILD_NUMBER}]' (${env.BUILD_URL})", "PENDING");
-						checkout([$class: 'GitSCM', branches: [[name: 'master']], doGenerateSubmoduleConfigurations: false, extensions: [], submoduleCfg: [], userRemoteConfigs: [[credentialsId: 'github', url: 'https://github.com/alanmacgowan/WebApplication.git']]])
+						checkout([$class: 'GitSCM', branches: [[name: 'master']], doGenerateSubmoduleConfigurations: false, extensions: [], submoduleCfg: [], userRemoteConfigs: [[credentialsId: 'github', url: 'https://github.com/Naveen77029/WebApplication.git']]])
 					}
 				}
 				stage('Restore dependencies'){
@@ -135,7 +135,7 @@ pipeline {
 void setBuildStatus(String message, String state) {
   step([
       $class: "GitHubCommitStatusSetter",
-      reposSource: [$class: "ManuallyEnteredRepositorySource", url: "https://github.com/alanmacgowan/WebApplication"],
+      reposSource: [$class: "ManuallyEnteredRepositorySource", url: "https://github.com/Naveen77029/WebApplication.git"],
       contextSource: [$class: "ManuallyEnteredCommitContextSource", context: "ci/jenkins/build-status"],
       errorHandlers: [[$class: "ChangingBuildStatusErrorHandler", result: "UNSTABLE"]],
       statusResultSource: [ $class: "ConditionalStatusResultSource", results: [[$class: "AnyBuildResult", message: message, state: state]] ]
